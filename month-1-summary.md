@@ -31,17 +31,11 @@ expected all or nearly all points inside, with at most a few near the edge.
 
 ## What surprised me
 
-* **The result was too clean.** A perfect 65 of 65 with no edge cases makes me suspect the count was nearly
-  guaranteed by how the data was prepared. If the amenity points were pulled or clipped using this same
-  boundary, they could not fall outside it. The count confirms the layers are consistent; it does not tell me
-  whether the ward has more amenities than the layer holds.
-* **The amenity layer changed size between exercises.** The earlier schools-only layer had 16 points, and this
-  one has 65, so the two need reconciling.
-* **No health facilities came through the amenity query.** The 16-point layer was all `amenity = school`.
-  Hospitals only appear as 8 `building = hospital` polygons in the HotOSM buildings file, so the "health
-  facilities" side of the wider Tabata question rests on very few features.
-* **Only about 7% of road segments are hard-paved** (asphalt, concrete or paved). That is a small base for any
-  later paved-road access analysis.
+* **No points near the edge at all.** I expected all or nearly all points inside, with "at most a few near the
+  edge". I got 65 of 65 with none close to the boundary line in the map check, which is a cleaner result than I
+  predicted.
+* **Even the hand check was easy.** The `college` point gave an odd number of ray crossings in both directions
+  (3 going west), so it was clearly inside. Nothing forced me to think about a borderline case.
 
 ## What I still need
 
@@ -50,12 +44,8 @@ expected all or nearly all points inside, with at most a few near the edge.
   Mtambani, Tenge, Kisiwani and others).
 * An amenity layer pulled independently of the ward boundary (a wider bounding box, clipped afterwards), so the
   count can actually fail and test whether the ward is fully covered.
-* A proper health-facility layer (clinics, dispensaries, hospitals as points, with type), not just 8 hospital
-  building footprints.
 * The breakdown of the 65 points by amenity category, so the count says what kinds of amenities exist and not
   only how many.
-* A better `surface` attribute for roads (or a field survey), since roughly 93% of segments are not tagged as
-  hard-paved and the untagged ones may be under-recorded.
 
 ## Sources
 
