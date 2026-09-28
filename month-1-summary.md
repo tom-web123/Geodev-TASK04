@@ -27,7 +27,7 @@ expected all or nearly all points inside, with at most a few near the edge.
   * The map shows every point inside the outline, none on or across the edge.
   * The row count matches (1 row, and 65 points in the input layer).
   * A hand check on the `college` point (ray casting, odd number of crossings) confirmed it is inside.
-  * There are 0 empty or null geometries in any layer, and the boundary ring is closed (297 vertices).
+  * There are null geometries in any layer, and the boundary ring is closed (297 vertices).
 
 ## What surprised me
 
