@@ -1,16 +1,22 @@
 # Counting Amenities Within the Tabata Ward Boundary
 
-This repository contains Tabata ward's amenity points (schools, pharmacies, clinics, and more) and ward boundary, both in EPSG:32737 (WGS 84 / UTM zone 37S), with a point-in-polygon count run against the boundary.
+All data for this analysis is in `tabata_analysis.gpkg`, in EPSG:32737 (WGS 84 / UTM zone 37S).
 
 **Research question:** How many amenity points fall within the Tabata ward boundary?
 
-**Contents:**
-- `tabata_analysis_ready.gpkg` — analysis-ready GeoPackage (`amenity` point layer, `boundary` polygon layer carrying the `NUMPOINTS` result)
-- `data_note.md` — CRS decisions, what was run and why, and the five quality checks
-- `run_analysis_all_amenities.py` / `gpkg_lib.py` — independent Python re-run of the point-in-polygon count, for cross-checking the QGIS result
-- `tabata_amenity_count_map.png` — result map (title, legend, scale bar, north arrow)
-- `task04.png` — full printed QGIS layout map (all amenity categories, roads, streets)
+**Answer:** 65 of 65. Every amenity point is inside the boundary (`NUMPOINTS = 65`, 0 outside), confirmed by QGIS's Count Points in Polygon 
 
-**Result:** 65 of 65 amenity points fall inside the boundary — confirmed by both QGIS's own *Count Points in Polygon* algorithm and an independent Python check. Full write-up, prediction, and four-way verification (map / row count / hand check / empty-geometry check) in `data_note.md`.
+**Layers in `tabata_analysis.gpkg`:**
+- `amenity`: 65 amenity points (POINT)
+- `tabata_boundary`: Tabata ward boundary, the polygon used for the count (MULTIPOLYGON)
+- `count`: QGIS output, the boundary with the `NUMPOINTS` field added (MULTIPOLYGON)
+- `roads`: 564 road segments in the ward, used for map context (MULTILINESTRING)
 
-**Sources:** amenity points and ward boundary derived from OpenStreetMap and locally digitized ward-level administrative data for Tabata, Ilala Municipality, Dar es Salaam.
+**Other files:**
+- `data_note.md`: CRS, how the count was run, the prediction, the four result checks, the map, data quality checks and problems found
+- `04.qgz`: QGIS project, with its layers pointed at `tabata_analysis.gpkg`
+- `run_analysis_all_amenities.py`, `gpkg_lib.py`: independent Python re-run of the count (`python3 run_analysis_all_amenities.py`)
+- `tabata_amenity_count_map.png`: simple result map (title, legend, scale bar, north arrow)
+- `task04.png`: full QGIS layout map (title, legend, scale bar, north arrow, coordinate grid)
+
+**Sources:** amenity points, derived from OpenStreetMap ( https://www.openstreetmap.org/ ), roads from a HOTOSM export ( https://export.hotosm.org/v3/ ) and ward boundary i got it from HCMGIS plugin in QGIS
